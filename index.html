@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>새차원회</title>
+
+<style>
+body{
+    margin:0;
+    background:white;
+    font-family:Arial, sans-serif;
+    color:#111;
+    text-align:center;
+}
+
+/* 햄버거 버튼 */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:28px;
+    cursor:pointer;
+    z-index:1000;
+}
+
+.menu-btn div{
+    height:3px;
+    background:#111;
+    margin:6px 0;
+    transition:0.3s;
+}
+
+/* 사이드 메뉴 */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-220px;
+    width:220px;
+    height:100%;
+    background:#f4f4f4;
+    padding-top:100px;
+    transition:0.3s;
+    box-shadow:2px 0 8px rgba(0,0,0,0.1);
+}
+
+/* 메뉴 열림 상태 */
+.sidebar.open{
+    left:0;
+}
+
+/* 메뉴 링크 */
+.sidebar a{
+    display:block;
+    padding:15px 40px 15px 15px; /* ← 오른쪽 여더 넓힘 */
+    text-decoration:none;
+    color:#333;
+    font-size:17px; /* ← 글씨 조금 키움 */
+    transition:0.2s;
+    text-align:right;
+}
+.sidebar a:hover{
+    background:#e6e6e6;
+}
+
+/* 활성 메뉴 */
+.sidebar a.active{
+    background:#dcdcdc;
+}
+
+/* 상단 영역 */
+.top{
+    padding-top:60px;
+}
+
+/* 로고 */
+.logo{
+    width:80px;
+    margin-bottom:10px;
+}
+
+/* 제목 */
+h1{
+    margin:0;
+    font-size:28px;
+    letter-spacing:4px;
+}
+</style>
+</head>
+<body>
+
+<!-- 햄버거 버튼 -->
+<div class="menu-btn" onclick="toggleMenu()">
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<!-- 사이드 메뉴 -->
+<div class="sidebar" id="sidebar">
+<a href="#" class="active">소개</a>
+<a href="#">교리</a>
+<a href="#">기록</a>
+<a href="#">접속</a>
+</div>
+
+<!-- 상단 -->
+<div class="top">
+<img class="logo" src="img/logo.png">
+<h1>새차원회</h1>
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+const links = document.querySelectorAll(".sidebar a");
+
+links.forEach(link=>{
+    link.addEventListener("click", function(e){
+        e.preventDefault();
+        links.forEach(l=>l.classList.remove("active"));
+        this.classList.add("active");
+    });
+});
+</script>
+
+</body>
+</html>
