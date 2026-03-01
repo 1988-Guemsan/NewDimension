@@ -10,77 +10,143 @@ body{
     background:white;
     font-family:Arial, sans-serif;
     color:#111;
-}
-
-/* 상단 로고영역 */
-.top{
-    padding-top:60px;
     text-align:center;
 }
+
+/* 햄버거 */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:28px;
+    cursor:pointer;
+    z-index:1000;
+}
+.menu-btn div{
+    height:3px;
+    background:#111;
+    margin:6px 0;
+}
+
+/* 사이드바 */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-220px;
+    width:220px;
+    height:100%;
+    background:#f4f4f4;
+    padding-top:100px;
+    transition:0.3s;
+    box-shadow:2px 0 8px rgba(0,0,0,0.1);
+}
+.sidebar.open{ left:0; }
+
+.sidebar a{
+    display:block;
+    padding:15px 40px 15px 15px;
+    text-decoration:none;
+    color:#333;
+    font-size:17px;
+    text-align:right;
+}
+.sidebar a:hover{ background:#e6e6e6; }
+.sidebar a.active{ background:#dcdcdc; }
+
+/* 상단 */
+.top{ padding-top:60px; }
+
 .logo{
     width:110px;
     margin-bottom:2px;
 }
+
 h1{
     margin:0;
     font-size:28px;
     letter-spacing:4px;
 }
-
-/* 공지 영역 */
-.notice-wrap{
-    max-width:900px;
-    margin:80px auto;
-    padding:0 20px;
+h1 a{
+    text-decoration:none;
+    color:#111;
 }
 
 /* 공지 박스 */
+.notice-wrap{
+    max-width:800px;
+    margin:120px auto;
+    padding:0 20px;
+}
 .notice{
     border:1px solid #ddd;
     padding:28px;
     margin-bottom:25px;
-    transition:0.2s;
+    text-align:left;
 }
-
-.notice:hover{
-    border-color:#bbb;
-}
-
-/* 제목 */
 .notice h2{
     margin:0;
     font-size:24px;
-    font-weight:700;
-    color:#222;
+}
+
+/* 이메일 */
+.contact-email{
+    position:fixed;
+    bottom:12px;
+    right:18px;
+    font-size:12px;
+    color:#999;
+}
+.contact-email a{
+    color:#999;
+    text-decoration:none;
 }
 </style>
 </head>
 <body>
 
+<div class="menu-btn" onclick="toggleMenu()">
+<div></div><div></div><div></div>
+</div>
+
+<div class="sidebar" id="sidebar">
+<a href="index.html">소개</a>
+<a href="notice.html" class="active">공지</a>
+<a href="location.html">오시는길</a>
+</div>
+
 <div class="top">
 <img class="logo" src="img/logo.png">
-<h1>새차원회</h1>
+<h1><a href="index.html">새차원회</a></h1>
 </div>
 
 <section class="notice-wrap">
 
-<div class="notice">
-<h2>임시 공지 제목입니다</h2>
-</div>
-
-<div class="notice">
-<h2>두번째 공지 제목 자리</h2>
-</div>
-
-<div class="notice">
-<h2>세번째 공지 제목 자리</h2>
-</div>
-
-<div class="notice">
-<h2>네번째 공지 제목 자리</h2>
-</div>
+<div class="notice"><h2>임시 공지 제목입니다</h2></div>
+<div class="notice"><h2>두번째 공지 제목 자리</h2></div>
+<div class="notice"><h2>세번째 공지 제목 자리</h2></div>
+<div class="notice"><h2>네번째 공지 제목 자리</h2></div>
 
 </section>
+
+<div class="contact-email">
+문의 이메일
+<a href="mailto:lee.new.dimension@gmail.com">lee.new.dimension@gmail.com</a>
+</div>
+
+<script>
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("open");
+}
+
+const links=document.querySelectorAll(".sidebar a");
+links.forEach(link=>{
+link.addEventListener("click",function(e){
+if(this.getAttribute("href")==="#"){ e.preventDefault(); }
+links.forEach(l=>l.classList.remove("active"));
+this.classList.add("active");
+});
+});
+</script>
 
 </body>
 </html>
